@@ -20,6 +20,7 @@
 * [Grind 169 questions](https://www.techinterviewhandbook.org/grind75?weeks=26&hours=40)
 * [Top Interview 150](https://leetcode.com/studyplan/top-interview-150/)
 * [LeetCode 75](https://leetcode.com/studyplan/leetcode-75/)
+* [NeetCode 150](https://neetcode.io/practice)
 
 ## 每份筆記可能會記錄以下幾項
 

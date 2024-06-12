@@ -22,6 +22,10 @@
 * [LeetCode 75](https://leetcode.com/studyplan/leetcode-75/)
 * [NeetCode 150](https://neetcode.io/practice)
 
+### Extended questions
+
+從 LeetCode 高頻題的 Similar Questions 找到的題目。
+
 ## 每份筆記可能會記錄以下幾項
 
 1. 解題的程式碼，也包括在其他平台上，高手公開發表的程式碼(附上來源)

@@ -18,12 +18,6 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 求**區段和**的題目，可以聯想到此演算法。
 
-#### 例題:
-
-- [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self)
-- [525. Contiguous Array](https://leetcode.com/problems/contiguous-array/)
-- [523. Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum)
-
 #### Prefix Sum LeetCode 題目列表
 
 [Prefix Sum](https://leetcode.com/tag/prefix-sum/)
@@ -147,6 +141,28 @@ const result = monotonicDecreasing(nums); // [9, 6, 5]
 
 #### 例題:
 
+[739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures)
+
+## Linked List
+
+反轉鏈表 和 取鏈表的中間節點 是解 LeetCode 鏈表題很常用的操作，合併排序的鏈表有幾次也有用到
+
+### 反轉鏈表
+
+參考 LeetCode [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list) 這題
+
+### 取鏈表的中間節點
+
+參考 LeetCode [876. Middle of the Linked List](https://leetcode.com/problems/middle-of-the-linked-list) 這題
+
+### 合併排序的鏈表
+
+參考 LeetCode [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists) 這題
+
+### Doubly Linked List
+
+[Implementation of Doubly Linked List in JavaScript](https://www.geeksforgeeks.org/implementation-of-doubly-linked-list-in-javascript/)
+
 ## 不算常用演算法
 
 ### Moore majority vote algorithm(摩爾投票演算法)
@@ -161,12 +177,23 @@ const result = monotonicDecreasing(nums); // [9, 6, 5]
 - [169. Majority Element](https://leetcode.com/problems/majority-element/description/)
 - [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/description/)
 
+### Manacher's Algorithm
+
+以 O(n) 時間複雜度，查找一個字串的最長回文子字串的演算法。可參考 5. Longest Palindromic Substring 這題的筆記。
 
 ## 非演算法(一些語法)
 
 ### 函式 `Math.trunc()`
 
-可以直接去掉小數點的數字 
+可以直接去掉小數點的數字
+
+### Map.prototype.entries()、keys()、values()
+
+```javascript
+for (const [key, value] of hashMap.entries()) {
+  // ...
+}
+```
 
 ## 待讀
 

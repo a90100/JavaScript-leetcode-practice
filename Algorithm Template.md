@@ -8,6 +8,8 @@
 const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 ```
 
+[How can I create a two-dimensional array in JavaScript?](https://sentry.io/answers/how-can-i-create-a-two-dimensional-array-in-javascript/)
+
 #### 例題:
 
 - [2624. Snail Traversal](https://leetcode.com/problems/snail-traversal)
@@ -163,6 +165,92 @@ const result = monotonicDecreasing(nums); // [9, 6, 5]
 
 [Implementation of Doubly Linked List in JavaScript](https://www.geeksforgeeks.org/implementation-of-doubly-linked-list-in-javascript/)
 
+## Binary Tree
+
+> Tree is special form of graph.
+
+### BFS(Breadth-First Search)
+
+```javascript
+const BFS = (root) => {
+  const queue = [root];
+  const res = [];
+
+  while (queue[0]) {
+    const currQueueLength = queue.length;
+
+    for (let i = 0; i < currQueueLength; i++) {
+      let cur = queue.shift();
+      res.push(cur);
+
+      if (cur.left) queue.push(cur.left);
+      if (cur.right) queue.push(cur.right);
+    }
+  }
+
+  return res;
+};
+```
+
+#### 例題:
+
+- [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal)
+
+## Binary Search
+
+```javascript
+var search = function (nums, target) {
+  let l = 0;
+  let r = nums.length - 1;
+
+  while (l <= r) {
+    const mid = Math.floor((l + r) / 2);
+    if (nums[mid] === target) return mid;
+    if (nums[mid] > target) {
+      r = mid - 1;
+    } else {
+      l = mid + 1;
+    }
+  }
+  return -1;
+};
+```
+
+#### 例題:
+
+[704. Binary Search](https://leetcode.com/problems/binary-search)
+
+## Graph
+
+### DFS & BFS
+
+#### 例題:
+
+[200. Number of Islands](https://leetcode.com/problems/number-of-islands)
+
+> DFS、BFS 都能解
+
+[79. Word Search](https://leetcode.com/problems/word-search)
+
+> DFS
+
+### Topological sorting 拓撲排序
+
+拓撲排序是針對特定種類圖的演算法: Directed acyclic graph (DAG)，有向無環圖。撰寫此演算法時常會宣告有關圖的 indegree(入度)。 
+
+> 有向無環圖為**邊有方向，圖內無環**的圖。
+
+應用範例: 選課系統的先修課，要先修完某些課才能修指定課程
+
+#### 例題:
+
+[207. Course Schedule](https://leetcode.com/problems/course-schedule)
+
+[310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees)
+
+### Union-Find  併查集
+
+
 ## 不算常用演算法
 
 ### Moore majority vote algorithm(摩爾投票演算法)
@@ -193,6 +281,20 @@ const result = monotonicDecreasing(nums); // [9, 6, 5]
 for (const [key, value] of hashMap.entries()) {
   // ...
 }
+```
+
+### hashMap
+
+如果 value 是陣列，用這種寫法而不是 Spread Operator
+
+```javascript
+// O(1)
+const values = hashMap.get(key) || [];
+values.push(newObj);
+hashMap.set(key, values);
+
+// O(n)
+hashMap.set(key, hashMap.get(key) ? [...hashMap.get(key), newObj] : [newObj]);
 ```
 
 ## 待讀

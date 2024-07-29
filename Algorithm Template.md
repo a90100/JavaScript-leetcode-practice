@@ -36,6 +36,38 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 - [39. Combination Sum](https://leetcode.com/problems/combination-sum)
 
+## HashMap、HashSet
+
+### 做 mapping 的內建函式有以下這些
+
+都可以用 forEach 做 mapping。
+
+#### 例題:
+
+[347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements)
+
+#### Map.prototype.entries()、keys()、values()
+
+```javascript
+for (const [key, value] of hashMap.entries()) {
+  // ...
+}
+```
+
+### 更新 HashMap
+
+如果 value 是陣列，用這種寫法而不是 Spread Operator
+
+```javascript
+// O(1)
+const values = hashMap.get(key) || [];
+values.push(newObj);
+hashMap.set(key, values);
+
+// O(n)
+hashMap.set(key, hashMap.get(key) ? [...hashMap.get(key), newObj] : [newObj]);
+```
+
 ## Queue
 
 ### Monotonic Queues
@@ -194,7 +226,25 @@ const BFS = (root) => {
 
 #### 例題:
 
-- [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal)
+[102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal)
+
+### Preorder Traversal(前序遍歷)
+
+先拜訪父節點再拜訪左右子節點。
+
+### Inorder Traversal(中序遍歷)
+
+會先拜訪左子節點，再拜訪父節點，最後拜訪右子節點。
+
+[Inorder Traversal of Binary Tree](https://www.geeksforgeeks.org/inorder-traversal-of-binary-tree/)
+
+#### 例題:
+
+[230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst)
+
+### Postorder traversal(後序遍歷)
+
+先拜訪左右子節點，最後拜訪父節點。
 
 ## Binary Search
 
@@ -236,7 +286,7 @@ var search = function (nums, target) {
 
 ### Topological sorting 拓撲排序
 
-拓撲排序是針對特定種類圖的演算法: Directed acyclic graph (DAG)，有向無環圖。撰寫此演算法時常會宣告有關圖的 indegree(入度)。 
+拓撲排序是針對特定種類圖的演算法: Directed acyclic graph (DAG)，有向無環圖。撰寫此演算法時常會宣告有關圖的 indegree(入度)。
 
 > 有向無環圖為**邊有方向，圖內無環**的圖。
 
@@ -248,8 +298,75 @@ var search = function (nums, target) {
 
 [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees)
 
-### Union-Find  併查集
+### Union-Find 併查集
 
+### Bellman Ford algorithm(貝爾曼-福特演算法)
+
+假設一個圖有 v 個點，會進行 v - 1 次的迴圈計算，每次計算的最短路徑值會漸漸地被更加準確的值替代，直至得到最佳解。
+
+> 不能計算負權環圖，因為負權環可以無限制的降低總花費
+
+[Bellman Ford Algorithm | Shortest path & Negative cycles | Graph Theory](https://youtu.be/lyw4FaxrwHg)
+
+[BellmanFord 算法详解(注意根据标好的顺序观看)](https://youtube.com/playlist?list=PLf4URHiWMndm3NfqFdebywKPZ6Uktn9Sw&si=o4WNk2xzfRX2SBRE)
+
+> 3. Bellmanford 算法 3--动态规划解决 為主
+
+#### 例題:
+
+[787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops)
+
+## Heap / Priority Queue
+
+使用 [@datastructures-js/priority-queue](https://github.com/datastructures-js/priority-queue/blob/v5/README.md)
+
+#### 範例
+
+```javascript
+// 初始化，使用 dis 的值當排序，MinPriorityQueue 也可以改成 MaxPriorityQueue
+const minQueue = new MinPriorityQueue({ priority: (point) => point.dis });
+
+// 加入元素到 queue
+minQueue.enqueue({ dis /*其他...*/ });
+
+// 取出元素
+minQueue.dequeue();
+
+// 取出元素格式
+// {
+//   priority: 根據 dis 值而定,
+//   element: { dis: 根據 dis 值而定, 其他... }
+// }
+
+// 例題: 692. Top K Frequent Words
+// 若要考慮到兩個以上的 priority 可以這樣寫:
+
+const maxHeap = new MaxPriorityQueue({
+  compare: (e1, e2) => {
+    if (e1.freq > e2.freq) return -1; // do not swap
+    if (e1.freq < e2.freq) return 1; // swap
+    return e1.word < e2.word ? -1 : 1;
+  },
+});
+
+// 加入元素到 queue
+maxHeap.enqueue({ freq: value, word: key });
+
+// 取出元素
+maxHeap.dequeue();
+
+// 取出元素格式 (直接取得存入的物件本身)
+// { freq: 2, word: 'i' }
+
+// 其他種寫法
+const patientsQueue = new MinPriorityQueue();
+
+patientsQueue
+  .enqueue('patient y', 1) // highest priority
+  .enqueue('patient z', 3)
+  .enqueue('patient w', 4) // lowest priority
+  .enqueue('patient x', 2);
+```
 
 ## 不算常用演算法
 
@@ -269,33 +386,104 @@ var search = function (nums, target) {
 
 以 O(n) 時間複雜度，查找一個字串的最長回文子字串的演算法。可參考 5. Longest Palindromic Substring 這題的筆記。
 
+#### 例題:
+
+[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring)
+
+### Floyd Cycle Detection Algorithm(Floyd 判圈算法)
+
+Floyd 判圈算法，又稱龜兔賽跑算法(Tortoise and Hare Algorithm)，是一個可以在有限狀態機、迭代函數或者鍊表上判斷是否存在環，求出該環的起點與長度的算法。
+
+#### 例題:
+
+[287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number)
+
 ## 非演算法(一些語法)
 
 ### 函式 `Math.trunc()`
 
-可以直接去掉小數點的數字
+可以直接去掉小數點的數字。
 
-### Map.prototype.entries()、keys()、values()
+### String.prototype.repeat()
+
+重複字串指定的次數。
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
+
+### 取亂數
+
+> 生成 0 ~ x 間的亂數
 
 ```javascript
-for (const [key, value] of hashMap.entries()) {
-  // ...
+function getRandom(x) {
+  return Math.floor(Math.random() * x);
 }
 ```
 
-### hashMap
+### [Bitwise AND (&)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_AND)
 
-如果 value 是陣列，用這種寫法而不是 Spread Operator
+可以計算兩個數字其二進位數的每個位元是否都為一然後輸出
 
 ```javascript
-// O(1)
-const values = hashMap.get(key) || [];
-values.push(newObj);
-hashMap.set(key, values);
+const a = 5; // 00000000000000000000000000000101
+const b = 3; // 00000000000000000000000000000011
 
-// O(n)
-hashMap.set(key, hashMap.get(key) ? [...hashMap.get(key), newObj] : [newObj]);
+console.log(a & b); // 00000000000000000000000000000001
 ```
+
+### [Bitwise XOR (^)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_XOR)
+
+兩個數字轉成二進位後，兩個數相同位元只要不是都是 1 或 0 就輸出 1
+
+> 特性 兩個數做 ^ 會變成 0，可練習 [136. Single Number](https://leetcode.com/problems/single-number)
+
+```javascript
+const a = 5; // 00000000000000000000000000000101
+const b = 3; // 00000000000000000000000000000011
+
+console.log(a ^ b); // 00000000000000000000000000000110
+// Expected output: 6
+```
+
+### (左、右)位移位運算子、無符號右位移運算子
+
+- [Left shift (<<)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Left_shift)
+- [Right shift (>>)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Right_shift)
+- [Unsigned right shift (>>>)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Unsigned_right_shift)
+
+```javascript
+const a = 5; // 00000000000000000000000000000101
+const b = 2; // 00000000000000000000000000000010
+
+console.log(a << b); // 00000000000000000000000000010100
+// Expected output: 20
+//-----------------------------------------------------------
+const a = 5; //  00000000000000000000000000000101
+const b = 2; //  00000000000000000000000000000010
+const c = -5; //  11111111111111111111111111111011
+
+console.log(a >> b); //  00000000000000000000000000000001
+// Expected output: 1
+
+console.log(c >> b); //  11111111111111111111111111111110
+// Expected output: -2
+//-----------------------------------------------------------
+const a = 5; //  00000000000000000000000000000101
+const b = 2; //  00000000000000000000000000000010
+const c = -5; //  11111111111111111111111111111011
+
+console.log(a >>> b); //  00000000000000000000000000000001
+// Expected output: 1
+
+console.log(c >>> b); //  00111111111111111111111111111110，差異在整個數字右移後，前面補上 b 個 0
+// Expected output: 1073741822
+```
+
+## 其餘補充
+
+### 貪婪演算法(greedy algorithm)
+
+[貪婪演算法](https://zh.wikipedia.org/zh-tw/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95)
 
 ## 待讀
 

@@ -33,3 +33,7 @@
 3. 該解法的時間、空間複雜度
 4. 有需要再多加練習的題目記得標記
 5. 其他類(額外補充之類的資訊)
+
+## 如果在 LeetCode 上找不到看得懂的 Solutions...
+
+可以到 [https://leetcode.cn/](https://leetcode.cn/)，中國版去看題解。

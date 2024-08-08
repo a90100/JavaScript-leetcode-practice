@@ -320,7 +320,9 @@ var search = function (nums, target) {
 
 使用 [@datastructures-js/priority-queue](https://github.com/datastructures-js/priority-queue/blob/v5/README.md)
 
-#### 範例
+#### 使用範例
+
+1.
 
 ```javascript
 // 初始化，使用 dis 的值當排序，MinPriorityQueue 也可以改成 MaxPriorityQueue
@@ -337,7 +339,29 @@ minQueue.dequeue();
 //   priority: 根據 dis 值而定,
 //   element: { dis: 根據 dis 值而定, 其他... }
 // }
+```
 
+2.
+
+```javascript
+const minQueue = new MinPriorityQueue();
+
+// 加入元素到 queue
+minQueue.enqueue(num);
+
+// 取出元素
+minQueue.dequeue();
+
+// 取出元素格式
+// {
+//   priority: num,
+//   element: num
+// }
+```
+
+3.
+
+```javascript
 // 例題: 692. Top K Frequent Words
 // 若要考慮到兩個以上的 priority 可以這樣寫:
 
@@ -357,7 +381,11 @@ maxHeap.dequeue();
 
 // 取出元素格式 (直接取得存入的物件本身)
 // { freq: 2, word: 'i' }
+```
 
+4.
+
+```javascript
 // 其他種寫法
 const patientsQueue = new MinPriorityQueue();
 
@@ -366,6 +394,14 @@ patientsQueue
   .enqueue('patient z', 3)
   .enqueue('patient w', 4) // lowest priority
   .enqueue('patient x', 2);
+
+console.log(patientsQueue.toArray());
+// [
+//   { priority: 1, element: 'patient y' },
+//   { priority: 2, element: 'patient x' },
+//   { priority: 3, element: 'patient z' },
+//   { priority: 4, element: 'patient w' }
+// ]
 ```
 
 ## 不算常用演算法

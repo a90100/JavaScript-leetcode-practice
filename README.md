@@ -18,9 +18,10 @@
 包含一些面試高頻、重要題目的解題紀錄
 
 * [Grind 169 questions](https://www.techinterviewhandbook.org/grind75?weeks=26&hours=40)
-* [Top Interview 150](https://leetcode.com/studyplan/top-interview-150/)
-* [LeetCode 75](https://leetcode.com/studyplan/leetcode-75/)
+* [Top Interview 150](https://leetcode.com/studyplan/top-interview-150)
+* [LeetCode 75](https://leetcode.com/studyplan/leetcode-75)
 * [NeetCode 150](https://neetcode.io/practice)
+* [Top 100 Liked](https://leetcode.com/studyplan/top-100-liked)
 
 ### Extended questions
 

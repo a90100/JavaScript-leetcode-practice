@@ -54,6 +54,17 @@ for (const [key, value] of hashMap.entries()) {
 }
 ```
 
+### 將取到的 keys、values 轉成陣列
+
+```javascript
+const map = new Map;
+
+map.set(1, '1');
+map.set(2, '2');
+
+console.log(Array.from(map.values()));
+```
+
 ### 更新 HashMap
 
 如果 value 是陣列，用這種寫法而不是 Spread Operator
@@ -520,6 +531,10 @@ console.log(c >>> b); //  00111111111111111111111111111110，差異在整個數�
 ### 貪婪演算法(greedy algorithm)
 
 [貪婪演算法](https://zh.wikipedia.org/zh-tw/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95)
+
+### String
+
+
 
 ## 待讀
 

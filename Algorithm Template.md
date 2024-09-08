@@ -57,7 +57,7 @@ for (const [key, value] of hashMap.entries()) {
 ### 將取到的 keys、values 轉成陣列
 
 ```javascript
-const map = new Map;
+const map = new Map();
 
 map.set(1, '1');
 map.set(2, '2');
@@ -243,19 +243,99 @@ const BFS = (root) => {
 
 先拜訪父節點再拜訪左右子節點。
 
+```javascript
+function preorderTraversal(node) {
+  // Base case
+  if (node === null) return;
+
+  // Visit the current node
+  console.log(node.data + ' ');
+
+  // Recur on the left subtree
+  preorderTraversal(node.left);
+
+  // Recur on the right subtree
+  preorderTraversal(node.right);
+}
+```
+
+[Preorder Traversal of Binary Tree](https://www.geeksforgeeks.org/preorder-traversal-of-binary-tree)
+
+#### 例題:
+
+[114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list)
+
 ### Inorder Traversal(中序遍歷)
 
 會先拜訪左子節點，再拜訪父節點，最後拜訪右子節點。
 
-[Inorder Traversal of Binary Tree](https://www.geeksforgeeks.org/inorder-traversal-of-binary-tree/)
+> 遍歷 Binary Search Tree，會得到由小到大的節點
+
+```javascript
+function printInorder(node) {
+  if (node === null) return;
+
+  // First recur on left subtree
+  printInorder(node.left);
+
+  // Now deal with the node
+  console.log(node.data);
+
+  // Then recur on right subtree
+  printInorder(node.right);
+}
+```
+
+[Inorder Traversal of Binary Tree](https://www.geeksforgeeks.org/inorder-traversal-of-binary-tree)
 
 #### 例題:
 
 [230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst)
 
+[173. Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator)
+
 ### Postorder traversal(後序遍歷)
 
 先拜訪左右子節點，最後拜訪父節點。
+
+```javascript
+function postorderTraversal(node) {
+  // Base case
+  if (node === null) return;
+
+  // Recur on the left subtree
+  postorderTraversal(node.left);
+
+  // Recur on the right subtree
+  postorderTraversal(node.right);
+
+  // Visit the current node
+  console.log(node.data);
+}
+```
+
+[Postorder Traversal of Binary Tree](https://www.geeksforgeeks.org/postorder-traversal-of-binary-tree)
+
+### Binary Search Tree
+
+1. 若任意節點的左子樹不空，則左子樹上所有節點的值均小於它的根節點的值
+2. 若任意節點的右子樹不空，則右子樹上所有節點的值均大於它的根節點的值
+3. 任意節點的左、右子樹也分別為二元搜尋樹
+4. 二元搜尋樹相比於其他資料結構的優勢在於尋找、插入的時間複雜度較低，為 `O(log n)`。
+
+#### 例題:
+
+[450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst)
+
+> 思考: 刪除節點後的更新情況有哪幾種?
+
+### Complete Binary Tree
+
+各層節點全滿，除了最後一層，最後一層節點全部靠左。
+
+#### 例題:
+
+[222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes)
 
 ## Binary Search
 
@@ -445,6 +525,14 @@ Floyd 判圈算法，又稱龜兔賽跑算法(Tortoise and Hare Algorithm)，是
 
 [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number)
 
+### Morris traversal 莫里斯遍歷
+
+[Algorithm 演算法 - 樹遍歷系列 Morris traversal 莫里斯遍歷](https://blog.taiwolskit.com/algorithm-morris-traversal)
+
+#### 例題:
+
+[114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list)
+
 ## 非演算法(一些語法)
 
 ### 函式 `Math.trunc()`
@@ -532,9 +620,9 @@ console.log(c >>> b); //  00111111111111111111111111111110，差異在整個數�
 
 [貪婪演算法](https://zh.wikipedia.org/zh-tw/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95)
 
-### String
+### if / else 以前沒注意過的特性
 
-
+參考 6. Zigzag Conversion 的筆記
 
 ## 待讀
 

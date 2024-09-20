@@ -63,6 +63,9 @@ map.set(1, '1');
 map.set(2, '2');
 
 console.log(Array.from(map.values()));
+
+const mySet = new Set([1, 1, 2, 3, 4, 4, 5, 6, 5]);
+let myArr = Array.from(mySet); // [1, 2, 3, 4, 5, 6]
 ```
 
 ### 更新 HashMap
@@ -339,6 +342,10 @@ function postorderTraversal(node) {
 
 ## Binary Search
 
+二分的本質是「二段性」而非「單調性」。
+
+[二分法的二段性、两套模板 和 答案判定](https://writings.sh/post/binary-search)
+
 ```javascript
 var search = function (nums, target) {
   let l = 0;
@@ -359,7 +366,7 @@ var search = function (nums, target) {
 
 #### 例題:
 
-[704. Binary Search](https://leetcode.com/problems/binary-search)
+[162. Find Peak Element](https://leetcode.com/problems/find-peak-element)
 
 ## Graph
 
@@ -390,6 +397,32 @@ var search = function (nums, target) {
 [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees)
 
 ### Union-Find 併查集
+
+最重要的 find、union 函式:
+
+```javascript
+const parents = [];
+
+const find = (x) => {
+  if (parents[x] !== x) {
+    parents[x] = find(parents[x]);
+  }
+
+  return parents[x];
+};
+
+const union = (x, y) => {
+  parents[find(x)] = find(y);
+};
+```
+
+更完整:
+
+[Union-Find 算法详解](https://github.com/labuladong/fucking-algorithm/blob/master/%E7%AE%97%E6%B3%95%E6%80%9D%E7%BB%B4%E7%B3%BB%E5%88%97/UnionFind%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.md)
+
+#### 例題:
+
+[547. Number of Provinces](https://leetcode.com/problems/number-of-provinces)
 
 ### Bellman Ford algorithm(貝爾曼-福特演算法)
 

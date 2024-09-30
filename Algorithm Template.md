@@ -562,6 +562,12 @@ Floyd 判圈算法，又稱龜兔賽跑算法(Tortoise and Hare Algorithm)，是
 
 [Algorithm 演算法 - 樹遍歷系列 Morris traversal 莫里斯遍歷](https://blog.taiwolskit.com/algorithm-morris-traversal)
 
+### Segment Tree 線段樹
+
+#### 例題:
+
+[729. My Calendar I](https://leetcode.com/problems/my-calendar-i)
+
 #### 例題:
 
 [114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list)
@@ -657,6 +663,29 @@ console.log(c >>> b); //  00111111111111111111111111111110，差異在整個數�
 
 參考 6. Zigzag Conversion 的筆記
 
-## 待讀
+### Modulo 10^9+7 (1000000007)
 
-https://medium.com/@derekfan/%E4%B9%9D%E7%AB%A0%E7%AE%97%E6%B3%95-template-binary-tree-iterative-pre-in-post-order-traversal-2af4625e086d
+參考資料: https://www.geeksforgeeks.org/modulo-1097-1000000007/
+
+以下 CHAT GPT 解釋:
+
+Modulo 10^9 + 7 (1000000007) 是一個非常常見的模數，特別是在競賽編程和算法設計中。
+
+這個數字有幾個重要的特性：
+
+1. 大質數：1000000007 是一個質數，因此當進行模運算時，它保證了乘法、加法等操作的結果是唯一且可逆的。例如，模數為質數時，乘法的逆元一定存在（可以使用擴展歐幾里得算法或快速冪算法來計算乘法逆元）。
+2. 防止數字溢出：在處理涉及大數的問題時，數值運算結果可能會超出計算機中整數的範圍（例如 C++ 中 int 類型的上限是約 2^31-1）。模 10^9 + 7 可以使結果保持在一個相對較小的範圍內，避免溢出。
+3. 效率高：1000000007 足夠大，使得在許多應用中它可以防止碰撞（例如哈希函數），同時也足夠小，使得計算效率高（如取模、乘法逆等）。
+
+常見應用：
+
+1. 計算大數問題：例如在計算大階乘、指數運算等時，由於數值會迅速增大，模數可以保持結果在可控範圍內。
+2. 動態規劃與組合數學：特別是在求解涉及排列、組合、二項式係數等問題時。
+
+### 雙端佇列 Deque
+
+https://weihanglo.tw/posts/2021/deque/
+
+### 打週賽
+
+1. input、測資不大時，有時可以暴力解題目，比較快完成而且出 bug 機率更少，比完再來優化，不過面試時又是另一回事

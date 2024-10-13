@@ -344,7 +344,7 @@ function postorderTraversal(node) {
 
 二分的本質是「二段性」而非「單調性」。
 
-[二分法的二段性、两套模板 和 答案判定](https://writings.sh/post/binary-search)
+### 基本模板
 
 ```javascript
 var search = function (nums, target) {
@@ -364,9 +364,109 @@ var search = function (nums, target) {
 };
 ```
 
+### 變形模板: 查找第一個值等於給定值的元素
+
+```javascript
+var search = function (nums, target) {
+  let l = 0;
+  let r = nums.length - 1;
+  let index = -1;
+
+  while (l <= r) {
+    const mid = Math.floor((l + r) / 2);
+    if (nums[mid] === target) {
+      index = mid;
+      r = mid - 1;
+    } else if (nums[mid] > target) {
+      r = mid - 1;
+    } else {
+      l = mid + 1;
+    }
+  }
+  return index;
+};
+```
+
+### 變形模板: 查找最後一個值等於給定值的元素
+
+```javascript
+var search = function (nums, target) {
+  let l = 0;
+  let r = nums.length - 1;
+  let index = -1;
+
+  while (l <= r) {
+    const mid = Math.floor((l + r) / 2);
+    if (nums[mid] === target) {
+      index = mid;
+      l = mid + 1;
+    } else if (nums[mid] > target) {
+      r = mid - 1;
+    } else {
+      l = mid + 1;
+    }
+  }
+  return index;
+};
+```
+
+### 變形模板: 查找第一個大於等於給定值的元素
+
+```javascript
+var search = function (nums, target) {
+  let l = 0;
+  let r = nums.length - 1;
+
+  while (l <= r) {
+    const mid = Math.floor((l + r) / 2);
+    if (nums[mid] === target) {
+      return mid;
+    } else if (nums[mid] > target) {
+      if (mid === 0 || nums[mid - 1] < target) return mid;
+      r = mid - 1;
+    } else {
+      l = mid + 1;
+    }
+  }
+  return nums.length; // 或回傳 -1，nums 所有元素都比給定值小
+};
+```
+
+### 變形模板: 查找最後一個小於等於給定值的元素
+
+```javascript
+var search = function (nums, target) {
+  let l = 0;
+  let r = matrix[0].length - 1;
+
+  while (l <= r) {
+    const mid = Math.floor((l + r) / 2);
+    if (matrix[0][mid] === target) {
+      return mid;
+    } else if (matrix[0][mid] > target) {
+      r = mid - 1;
+    } else {
+      if (mid === matrix[0].length - 1 || matrix[0][mid + 1] > target) return mid;
+      l = mid + 1;
+    }
+  }
+  return 0; // 或回傳 -1，nums 所有元素都比給定值大
+};
+```
+
+### 參考資源
+
+[二分法的二段性、两套模板 和 答案判定](https://writings.sh/post/binary-search)
+
+[3.9 二分查找](https://2xiao.github.io/leetcode-js/leetcode/algorithm/binary_search.html)
+
 #### 例題:
 
 [162. Find Peak Element](https://leetcode.com/problems/find-peak-element)
+
+[34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array)
+
+[240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii)
 
 ## Graph
 
@@ -396,7 +496,7 @@ var search = function (nums, target) {
 
 [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees)
 
-### Union-Find 併查集
+### Union-Find 並查集
 
 最重要的 find、union 函式:
 
@@ -423,6 +523,8 @@ const union = (x, y) => {
 #### 例題:
 
 [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces)
+
+[684. Redundant Connection](https://leetcode.com/problems/redundant-connection)
 
 ### Bellman Ford algorithm(貝爾曼-福特演算法)
 
@@ -558,19 +660,11 @@ Floyd 判圈算法，又稱龜兔賽跑算法(Tortoise and Hare Algorithm)，是
 
 [287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number)
 
+[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii)
+
 ### Morris traversal 莫里斯遍歷
 
 [Algorithm 演算法 - 樹遍歷系列 Morris traversal 莫里斯遍歷](https://blog.taiwolskit.com/algorithm-morris-traversal)
-
-### Segment Tree 線段樹
-
-#### 例題:
-
-[729. My Calendar I](https://leetcode.com/problems/my-calendar-i)
-
-#### 例題:
-
-[114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list)
 
 ## 非演算法(一些語法)
 
@@ -685,6 +779,34 @@ Modulo 10^9 + 7 (1000000007) 是一個非常常見的模數，特別是在競賽
 ### 雙端佇列 Deque
 
 https://weihanglo.tw/posts/2021/deque/
+
+### 生成樹 Spanning tree
+
+[Spanning Tree 介紹](https://web.ntnu.edu.tw/~algo/SpanningTree.html)
+
+#### 例題:
+
+[1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points)
+
+### Segment Tree 線段樹
+
+#### 例題:
+
+[729. My Calendar I](https://leetcode.com/problems/my-calendar-i)
+
+### Dijkstra's Algorithm(戴克斯特拉演算法)
+
+BFS + Heap
+
+[Day5-Dijkstra's Algorithm(戴克斯特拉演算法)](https://ithelp.ithome.com.tw/articles/10323129)
+
+#### 例題:
+
+[743. Network Delay Time](https://leetcode.com/problems/network-delay-time)
+
+### 找區間問題
+
+兩區間段是否相交只取決於前一個區間的 end 和後一個區間的 start，`start <= end` 則兩個區間會相交
 
 ### 打週賽
 

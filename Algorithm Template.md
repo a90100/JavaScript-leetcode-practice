@@ -82,6 +82,10 @@ hashMap.set(key, values);
 hashMap.set(key, hashMap.get(key) ? [...hashMap.get(key), newObj] : [newObj]);
 ```
 
+### HashMap 轉陣列、陣列轉 HashMap、HashMap 轉物件、物件轉 HashMap、HashMap 轉 JSON、JSON 轉 HashMap
+
+參考 [LeetCode-JS](https://2xiao.github.io/leetcode-js/book/hash.html#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2)
+
 ## Queue
 
 ### Monotonic Queues

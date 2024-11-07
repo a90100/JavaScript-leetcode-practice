@@ -24,18 +24,6 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 [Prefix Sum](https://leetcode.com/tag/prefix-sum/)
 
-### 回溯法(BackTracking)
-
-回溯法是一種找出問題所有解的演算法，常用遞迴的方式去窮舉各種結果的數值，一旦發現窮舉到和結果要求不符合的數值，就停止往下層窮舉下去，省去繼續往下探索的時間。
-
-程式碼常會出現遞迴加上 push、pop 陣列元素的操作。
-
-[五大基本算法之回溯算法 backtracking](https://houbb.github.io/2020/01/23/data-struct-learn-07-base-backtracking)
-
-#### 例題:
-
-- [39. Combination Sum](https://leetcode.com/problems/combination-sum)
-
 ## HashMap、HashSet
 
 ### 做 mapping 的內建函式有以下這些
@@ -63,6 +51,9 @@ map.set(1, '1');
 map.set(2, '2');
 
 console.log(Array.from(map.values()));
+
+// 或是
+console.log([...map.values()]);
 
 const mySet = new Set([1, 1, 2, 3, 4, 4, 5, 6, 5]);
 let myArr = Array.from(mySet); // [1, 2, 3, 4, 5, 6]
@@ -476,6 +467,8 @@ var search = function (nums, target) {
 
 ### DFS & BFS
 
+DFS 有「使用全域變數維護」和「接收返回值處理」兩種形式。
+
 #### 例題:
 
 [200. Number of Islands](https://leetcode.com/problems/number-of-islands)
@@ -634,6 +627,16 @@ console.log(patientsQueue.toArray());
 // ]
 ```
 
+## 動態規劃
+
+經典問題: 背包問題、找零錢問題
+
+#### 例題:
+
+[3335. Total Characters in String After Transformations I](https://leetcode.com/problems/total-characters-in-string-after-transformations-i/description/)
+
+> 兩種格式
+
 ## 不算常用演算法
 
 ### Moore majority vote algorithm(摩爾投票演算法)
@@ -690,6 +693,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 function getRandom(x) {
   return Math.floor(Math.random() * x);
 }
+```
+
+### 取出將 x 開根號後的最大整數
+
+```javascript
+const num = Math.floor(Math.sqrt(x));
 ```
 
 ### [Bitwise AND (&)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_AND)
@@ -749,9 +758,31 @@ console.log(a >>> b); //  00000000000000000000000000000001
 
 console.log(c >>> b); //  00111111111111111111111111111110，差異在整個數字右移後，前面補上 b 個 0
 // Expected output: 1073741822
+
+// 設 n 為 1~無限大值，則 1 << n 可以得到 2^n 值
+console.log(1 << n);
+console.log(1 << 5); // 32
 ```
 
+### 將英文字母轉 ASCII & 將 ASCII 轉英文字母
+
+[String.prototype.charCodeAt()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
+
+[String.fromCharCode()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode)
+
 ## 其餘補充
+
+### 回溯法(BackTracking)
+
+回溯法是一種找出問題所有解的演算法，常用遞迴的方式去窮舉各種結果的數值，一旦發現窮舉到和結果要求不符合的數值，就停止往下層窮舉下去，省去繼續往下探索的時間。
+
+程式碼常會出現遞迴加上 push、pop 陣列元素的操作。
+
+[五大基本算法之回溯算法 backtracking](https://houbb.github.io/2020/01/23/data-struct-learn-07-base-backtracking)
+
+#### 例題:
+
+- [39. Combination Sum](https://leetcode.com/problems/combination-sum)
 
 ### 貪婪演算法(greedy algorithm)
 
@@ -800,7 +831,7 @@ https://weihanglo.tw/posts/2021/deque/
 
 ### Dijkstra's Algorithm(戴克斯特拉演算法)
 
-BFS + Heap
+最短路徑演算法，BFS + Heap
 
 [Day5-Dijkstra's Algorithm(戴克斯特拉演算法)](https://ithelp.ithome.com.tw/articles/10323129)
 

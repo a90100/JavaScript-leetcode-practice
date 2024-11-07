@@ -25,7 +25,7 @@
 
 ### Extended questions
 
-從 LeetCode 高頻題的 Similar Questions 找到的題目。
+從 LeetCode 高頻題的 Similar Questions 找到的題目、每日一題、打過的周賽題目。
 
 ## 每份筆記可能會記錄以下幾項
 

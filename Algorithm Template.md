@@ -541,6 +541,17 @@ const union = (x, y) => {
 
 ## Heap / Priority Queue
 
+堆（Heap） 是一種特殊的樹形資料結構，只要滿足以下兩點的樹，就是堆：
+
+1. Heap 是一個完全二元樹
+2. Heap 中每一個節點的值都必須大於等於（或小於等於）其子樹中每個節點的值
+
+第四個不是 Heap:
+
+![](https://2xiao.github.io/leetcode-js/assets/2-7-1-uvdeiuE8.png)
+
+之前寫的文章: [Day7-Heap 堆積](https://ithelp.ithome.com.tw/articles/10324806)
+
 使用 [@datastructures-js/priority-queue](https://github.com/datastructures-js/priority-queue/blob/v5/README.md)
 
 #### 使用範例
@@ -824,6 +835,12 @@ https://weihanglo.tw/posts/2021/deque/
 [1584. Min Cost to Connect All Points](https://leetcode.com/problems/min-cost-to-connect-all-points)
 
 ### Segment Tree 線段樹
+
+是一種解決範圍查詢問題的資料結構，儲存區間或線段，主要用於處理陣列中的子區間問題，如區間和、區間最小值、區間最大值等。
+
+一個包含 n 個區間的線段樹，空間複雜度為 O(n)，查詢的時間複雜度則為 O(log n + k)，其中 k 是符合條件的區間數量。 
+
+![](https://2xiao.github.io/leetcode-js/assets/2-6-14-Ca9Lswd_.png)
 
 #### 例題:
 

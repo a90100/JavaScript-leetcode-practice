@@ -839,6 +839,8 @@ https://weihanglo.tw/posts/2021/deque/
 
 [743. Network Delay Time](https://leetcode.com/problems/network-delay-time)
 
+[3341. Find Minimum Time to Reach Last Room I](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/description/)
+
 ### 找區間問題
 
 兩區間段是否相交只取決於前一個區間的 end 和後一個區間的 start，`start <= end` 則兩個區間會相交
@@ -846,3 +848,4 @@ https://weihanglo.tw/posts/2021/deque/
 ### 打週賽
 
 1. input、測資不大時，有時可以暴力解題目，比較快完成而且出 bug 機率更少，比完再來優化，不過面試時又是另一回事
+2. 把解題想法寫下來有利於解題

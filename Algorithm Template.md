@@ -2,6 +2,16 @@
 
 ## Array
 
+### for 迴圈
+
+```javascript
+const res = [];
+
+for (let i = 0; i < ?.length; i++) {};
+
+return res;
+```
+
 ### 建立 2D 陣列
 
 ```javascript
@@ -14,6 +24,14 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 - [2624. Snail Traversal](https://leetcode.com/problems/snail-traversal)
 
+### 處理循環陣列
+
+善用除法。
+
+#### 例題:
+
+[1652. Defuse the Bomb](https://leetcode.com/problems/defuse-the-bomb)
+
 ### Prefix Sum
 
 [Prefix Sum（前綴和）概念](https://claire-chang.com/2023/05/04/prefix-sums%EF%BC%88%E5%89%8D%E7%B6%B4%E5%92%8C%EF%BC%89%E6%A6%82%E5%BF%B5/)
@@ -23,6 +41,16 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 #### Prefix Sum LeetCode 題目列表
 
 [Prefix Sum](https://leetcode.com/tag/prefix-sum/)
+
+### Difference Array 差分陣列(數組)
+
+適用情境為 頻繁對原始陣列的某個範圍進行增減，一般會宣告一個陣列 diff 去記錄。
+
+參考文章: [小而美的算法技巧：差分数组](https://labuladong.online/algo/data-structure/diff-array/)
+
+#### 例題:
+
+[3355. Zero Array Transformation I](https://leetcode.com/problems/zero-array-transformation-i)
 
 ## HashMap、HashSet
 
@@ -380,6 +408,8 @@ var search = function (nums, target) {
   }
   return index;
 };
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 11
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // -1
 ```
 
 ### 變形模板: 查找最後一個值等於給定值的元素
@@ -403,6 +433,8 @@ var search = function (nums, target) {
   }
   return index;
 };
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 21
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // -1
 ```
 
 ### 變形模板: 查找第一個大於等於給定值的元素
@@ -414,17 +446,17 @@ var search = function (nums, target) {
 
   while (l <= r) {
     const mid = Math.floor((l + r) / 2);
-    if (nums[mid] === target) {
-      return mid;
-    } else if (nums[mid] > target) {
+    if (nums[mid] < target) {
+      l = mid + 1;
+    } else {
       if (mid === 0 || nums[mid - 1] < target) return mid;
       r = mid - 1;
-    } else {
-      l = mid + 1;
     }
   }
-  return nums.length; // 或回傳 -1，nums 所有元素都比給定值小
+  return -1; // nums 所有元素都比給定值小
 };
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 11
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // -1
 ```
 
 ### 變形模板: 查找最後一個小於等於給定值的元素
@@ -432,21 +464,21 @@ var search = function (nums, target) {
 ```javascript
 var search = function (nums, target) {
   let l = 0;
-  let r = matrix[0].length - 1;
+  let r = nums.length - 1;
 
   while (l <= r) {
     const mid = Math.floor((l + r) / 2);
-    if (matrix[0][mid] === target) {
-      return mid;
-    } else if (matrix[0][mid] > target) {
+    if (nums[mid] > target) {
       r = mid - 1;
     } else {
-      if (mid === matrix[0].length - 1 || matrix[0][mid + 1] > target) return mid;
+      if (mid === nums.length - 1 || nums[mid + 1] > target) return mid;
       l = mid + 1;
     }
   }
-  return 0; // 或回傳 -1，nums 所有元素都比給定值大
+  return -1; // nums 所有元素都比給定值大
 };
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 21
+search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // 31
 ```
 
 ### 參考資源
@@ -478,6 +510,18 @@ DFS 有「使用全域變數維護」和「接收返回值處理」兩種形式�
 [79. Word Search](https://leetcode.com/problems/word-search)
 
 > DFS
+
+###  0-1 BFS
+
+邊權重只有 0 or 1 時，可以使用來找最短路徑。
+
+和一般 BFS 的差別是，維護的 queue 是 雙端佇列(double-ended queue)，遇到 0 權重邊加入 queue 首，遇到 1 權重邊加入 queue 尾，
+
+整個 queue 看起來就像 Increasing Monotonic Queue。
+
+#### 例題:
+
+[2290. Minimum Obstacle Removal to Reach Corner](https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/description/?envType=daily-question&envId=2024-11-28)
 
 ### Topological sorting 拓撲排序
 
@@ -522,6 +566,18 @@ const union = (x, y) => {
 [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces)
 
 [684. Redundant Connection](https://leetcode.com/problems/redundant-connection)
+
+### Dijkstra's Algorithm(戴克斯特拉演算法)
+
+最短路徑演算法，BFS + Heap
+
+[Day5-Dijkstra's Algorithm(戴克斯特拉演算法)](https://ithelp.ithome.com.tw/articles/10323129)
+
+#### 例題:
+
+[743. Network Delay Time](https://leetcode.com/problems/network-delay-time)
+
+[3341. Find Minimum Time to Reach Last Room I](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/description/)
 
 ### Bellman Ford algorithm(貝爾曼-福特演算法)
 
@@ -641,6 +697,8 @@ console.log(patientsQueue.toArray());
 ## 動態規劃
 
 經典問題: 背包問題、找零錢問題
+
+動態規劃有「選或不選」和「枚舉選哪個」兩種基本思考方式。子序列相鄰無關一般是「選或不選」，子序列相鄰相關（例如 LIS 問題）一般是「枚舉選哪個」。
 
 #### 例題:
 
@@ -793,7 +851,7 @@ console.log(1 << 5); // 32
 
 #### 例題:
 
-- [39. Combination Sum](https://leetcode.com/problems/combination-sum)
+[39. Combination Sum](https://leetcode.com/problems/combination-sum)
 
 ### 貪婪演算法(greedy algorithm)
 
@@ -846,23 +904,18 @@ https://weihanglo.tw/posts/2021/deque/
 
 [729. My Calendar I](https://leetcode.com/problems/my-calendar-i)
 
-### Dijkstra's Algorithm(戴克斯特拉演算法)
-
-最短路徑演算法，BFS + Heap
-
-[Day5-Dijkstra's Algorithm(戴克斯特拉演算法)](https://ithelp.ithome.com.tw/articles/10323129)
-
-#### 例題:
-
-[743. Network Delay Time](https://leetcode.com/problems/network-delay-time)
-
-[3341. Find Minimum Time to Reach Last Room I](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/description/)
-
 ### 找區間問題
 
 兩區間段是否相交只取決於前一個區間的 end 和後一個區間的 start，`start <= end` 則兩個區間會相交
+
+### 英文解讀
+
+舉 [3254. Find the Power of K-Size Subarrays I](https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/?envType=daily-question&envId=2024-11-16) 為例，`nums = [1,3,4]、k = 2`，結果為 `[-1,4]`。
+
+因為題目的 `consecutive` 指的是值連續，也就是 1, 2, 3, 4, 5...，`[1, 3]` 非連續，故為 -1。
 
 ### 打週賽
 
 1. input、測資不大時，有時可以暴力解題目，比較快完成而且出 bug 機率更少，比完再來優化，不過面試時又是另一回事
 2. 把解題想法寫下來有利於解題
+3. 有時測試資料會給你解題線索，ex: 1072. Flip Columns For Maximum Number of Equal Rows、1975. Maximum Matrix Sum

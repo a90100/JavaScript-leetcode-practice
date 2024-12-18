@@ -11,7 +11,7 @@ for (let i = 0; i < ?.length; i++) {};
 
 return res;
 ```
-
+vf
 ### 建立 2D 陣列
 
 ```javascript
@@ -28,9 +28,21 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 善用除法。
 
+另外一種做法是做兩個相同陣列的拼接。
+
 #### 例題:
 
 [1652. Defuse the Bomb](https://leetcode.com/problems/defuse-the-bomb)
+
+[3379. Transformed Array](https://leetcode.com/problems/transformed-array)
+
+### 判斷是否四個點能組成矩形
+
+若有兩對 x 相同的點，形成兩個垂直的邊 且 也有兩對 y 相同的點，形成兩個水平的邊，則可以組成矩形。
+
+例如：`[1, ?], [1, ?], [3, ?], [3, ?]` 且 `[?, 2], [?, 2], [?, 4], [?, 4]` 則可以組成。
+
+組合範例：`[1, 2], [1, 4], [3, 2], [3, 4]`。
 
 ### Prefix Sum
 
@@ -162,13 +174,25 @@ console.log(q); // [6, 5, 3]
 
 ## Stack
 
-使用 Stack 具有**用空間換時間**的概念
+使用 Stack 具有**用空間換時間**的概念，逆序處理也會想到 Stack。
+
+> 逆序處理參考 [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii)
 
 ### Monotonic Stack
 
 為 stack 內部數值保持遞增或遞減的 stack，如果新增的元素不符合 stack 內數值大小的規則，就 pop 出去，直到內部所有數值都保持遞增或遞減其一。
 
 當需要往前或是往後尋找陣列中，下一個比自己大或比自己小的元素時可以思考使用。
+
+#### 時間複雜度
+
+Monotonic Stack 的時間複雜度為 O(n)：
+
+1. 每個元素最多只會被「壓入（push）」一次：在遍歷陣列的過程中，每個元素只會被放入堆疊一次。
+
+2. 每個元素最多只會被「彈出（pop）」一次：當進入 while 迴圈時，會根據條件（如維持單調性）將堆疊中的元素彈出，但每個元素在彈出之後就不會再次被壓入。
+
+總操作次數不會超過 2n：由於每個元素只能被壓入一次且彈出一次，因此即使 while 迴圈嵌套在 for 迴圈中，整個過程中堆疊的操作次數最多為 n 次壓入和 n 次彈出，合計 2n 次操作。
 
 #### Monotonic Increasing Stack
 
@@ -367,6 +391,10 @@ function postorderTraversal(node) {
 
 二分的本質是「二段性」而非「單調性」。
 
+### 題目需求轉換思考
+
+假設陣列有排序，要求 `<= target` 的值，其實可以看做求第一個 `> target` 的值的前一個值，也可以看做求第一個 `>= target + 1` 的值的前一個值。
+
 ### 基本模板
 
 ```javascript
@@ -521,7 +549,7 @@ DFS 有「使用全域變數維護」和「接收返回值處理」兩種形式�
 
 #### 例題:
 
-[2290. Minimum Obstacle Removal to Reach Corner](https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/description/?envType=daily-question&envId=2024-11-28)
+[2290. Minimum Obstacle Removal to Reach Corner](https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner)
 
 ### Topological sorting 拓撲排序
 
@@ -577,7 +605,7 @@ const union = (x, y) => {
 
 [743. Network Delay Time](https://leetcode.com/problems/network-delay-time)
 
-[3341. Find Minimum Time to Reach Last Room I](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/description/)
+[3341. Find Minimum Time to Reach Last Room I](https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i)
 
 ### Bellman Ford algorithm(貝爾曼-福特演算法)
 
@@ -702,73 +730,11 @@ console.log(patientsQueue.toArray());
 
 #### 例題:
 
-[3335. Total Characters in String After Transformations I](https://leetcode.com/problems/total-characters-in-string-after-transformations-i/description/)
+[3335. Total Characters in String After Transformations I](https://leetcode.com/problems/total-characters-in-string-after-transformations-i)
 
 > 兩種格式
 
-## 不算常用演算法
-
-### Moore majority vote algorithm(摩爾投票演算法)
-
-[如何理解摩尔投票算法？](https://www.zhihu.com/question/49973163)
-
-優點: 空間複雜度低，適用大規模數據
-缺點: 不適用沒出現主要元素的情況，找到主要元素還須進一步驗證是否是所求的值
-
-使用題目:
-
-- [169. Majority Element](https://leetcode.com/problems/majority-element/description/)
-- [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/description/)
-
-### Manacher's Algorithm
-
-以 O(n) 時間複雜度，查找一個字串的最長回文子字串的演算法。可參考 5. Longest Palindromic Substring 這題的筆記。
-
-#### 例題:
-
-[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring)
-
-### Floyd Cycle Detection Algorithm(Floyd 判圈算法)
-
-Floyd 判圈算法，又稱龜兔賽跑算法(Tortoise and Hare Algorithm)，是一個可以在有限狀態機、迭代函數或者鍊表上判斷是否存在環，求出該環的起點與長度的算法。
-
-#### 例題:
-
-[287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number)
-
-[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii)
-
-### Morris traversal 莫里斯遍歷
-
-[Algorithm 演算法 - 樹遍歷系列 Morris traversal 莫里斯遍歷](https://blog.taiwolskit.com/algorithm-morris-traversal)
-
-## 非演算法(一些語法)
-
-### 函式 `Math.trunc()`
-
-可以直接去掉小數點的數字。
-
-### String.prototype.repeat()
-
-重複字串指定的次數。
-
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
-
-### 取亂數
-
-> 生成 0 ~ x 間的亂數
-
-```javascript
-function getRandom(x) {
-  return Math.floor(Math.random() * x);
-}
-```
-
-### 取出將 x 開根號後的最大整數
-
-```javascript
-const num = Math.floor(Math.sqrt(x));
-```
+## Bit
 
 ### [Bitwise AND (&)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_AND)
 
@@ -827,10 +793,78 @@ console.log(a >>> b); //  00000000000000000000000000000001
 
 console.log(c >>> b); //  00111111111111111111111111111110，差異在整個數字右移後，前面補上 b 個 0
 // Expected output: 1073741822
+```
 
+### 取代 Math.pow
+
+```javascript
 // 設 n 為 1~無限大值，則 1 << n 可以得到 2^n 值
 console.log(1 << n);
 console.log(1 << 5); // 32
+```
+
+## 不算常用演算法
+
+### Moore majority vote algorithm(摩爾投票演算法)
+
+[如何理解摩尔投票算法？](https://www.zhihu.com/question/49973163)
+
+優點: 空間複雜度低，適用大規模數據
+缺點: 不適用沒出現主要元素的情況，找到主要元素還須進一步驗證是否是所求的值
+
+使用題目:
+
+- [169. Majority Element](https://leetcode.com/problems/majority-element)
+- [229. Majority Element II](https://leetcode.com/problems/majority-element-ii)
+
+### Manacher's Algorithm
+
+以 O(n) 時間複雜度，查找一個字串的最長回文子字串的演算法。可參考 5. Longest Palindromic Substring 這題的筆記。
+
+#### 例題:
+
+[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring)
+
+### Floyd Cycle Detection Algorithm(Floyd 判圈算法)
+
+Floyd 判圈算法，又稱龜兔賽跑算法(Tortoise and Hare Algorithm)，是一個可以在有限狀態機、迭代函數或者鍊表上判斷是否存在環，求出該環的起點與長度的算法。
+
+#### 例題:
+
+[287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number)
+
+[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii)
+
+### Morris traversal 莫里斯遍歷
+
+[Algorithm 演算法 - 樹遍歷系列 Morris traversal 莫里斯遍歷](https://blog.taiwolskit.com/algorithm-morris-traversal)
+
+## 非演算法(一些語法)
+
+### 函式 `Math.trunc()`
+
+可以直接去掉小數點的數字。
+
+### String.prototype.repeat()
+
+重複字串指定的次數。
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
+
+### 取亂數
+
+> 生成 0 ~ x 間的亂數
+
+```javascript
+function getRandom(x) {
+  return Math.floor(Math.random() * x);
+}
+```
+
+### 取出將 x 開根號後的最大整數
+
+```javascript
+const num = Math.floor(Math.sqrt(x));
 ```
 
 ### 將英文字母轉 ASCII & 將 ASCII 轉英文字母
@@ -880,6 +914,8 @@ Modulo 10^9 + 7 (1000000007) 是一個非常常見的模數，特別是在競賽
 1. 計算大數問題：例如在計算大階乘、指數運算等時，由於數值會迅速增大，模數可以保持結果在可控範圍內。
 2. 動態規劃與組合數學：特別是在求解涉及排列、組合、二項式係數等問題時。
 
+[分享丨模运算的世界：当加减乘除遇上取模（模运算恒等式/费马小定理）](https://leetcode.cn/circle/discuss/mDfnkW/)
+
 ### 雙端佇列 Deque
 
 https://weihanglo.tw/posts/2021/deque/
@@ -913,6 +949,14 @@ https://weihanglo.tw/posts/2021/deque/
 舉 [3254. Find the Power of K-Size Subarrays I](https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/?envType=daily-question&envId=2024-11-16) 為例，`nums = [1,3,4]、k = 2`，結果為 `[-1,4]`。
 
 因為題目的 `consecutive` 指的是值連續，也就是 1, 2, 3, 4, 5...，`[1, 3]` 非連續，故為 -1。
+
+### 題目思考解法技巧
+
+#### 研究特殊情況，進而推導出一般情況
+
+參考 3381. Maximum Subarray Sum With Length Divisible by K 筆記
+
+[静态二维数点问题【力扣周赛 427】](【静态二维数点问题【力扣周赛 427】】 【精准空降到 16:41】 https://www.bilibili.com/video/BV1YeqHYSEhK/?share_source=copy_web&vd_source=046e3366270c2901ac2599c8630596cd&t=1001)
 
 ### 打週賽
 

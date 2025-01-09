@@ -4,8 +4,8 @@
 
 ### 解陣列問題常用的招式
 
-* 思考是否陣列有先排序
-* 思考將所有元素加總後的值有沒有用
+- 思考是否陣列有先排序
+- 思考將所有元素加總後的值有沒有用
 
 ### for 迴圈
 
@@ -16,7 +16,7 @@ for (let i = 0; i < ?.length; i++) {};
 
 return res;
 ```
-vf
+
 ### 建立 2D 陣列
 
 ```javascript
@@ -71,6 +71,23 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 ## HashMap、HashSet
 
+### 將陣列元素存入 hashMap
+
+```javascript
+const hashMap = new Map();
+
+for (let i = 0; i < s.length; i++) {
+  hashMap.set(s[i], (hashMap.get(s[i]) || 0) + 1);
+}
+
+// 更快的做法：lodash.js 的 _.countBy，不過是物件
+const hashMap = _.countBy(s);
+
+// for (let i = 0; i < s.length; i++) {
+//     if (hashMap[s[i]] === 1) return i; // 用物件的方式取 value
+// }
+```
+
 ### 做 mapping 的內建函式有以下這些
 
 都可以用 forEach 做 mapping。
@@ -85,6 +102,24 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 for (const [key, value] of hashMap.entries()) {
   // ...
 }
+
+// 物件的寫法：
+for (const [key, value] of Object.entries(obj1)) {
+  // ...
+}
+
+// 如果傳入陣列，會印出索引
+for (const [key, value] of Object.entries(array)) {
+  // ...
+}
+
+// 例如：
+for (const [key, value] of Object.entries([1,2])) {
+  console.log(key, value);
+}
+
+// 0 1
+// 1, 2
 ```
 
 ### 將取到的 keys、values 轉成陣列
@@ -182,6 +217,10 @@ console.log(q); // [6, 5, 3]
 使用 Stack 具有**用空間換時間**的概念，逆序處理也會想到 Stack。
 
 > 逆序處理參考 [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii)
+
+還有一個特性是遞迴能完成的事情，透過 Stack 也能完成。
+
+> Reason is that recursion relies on the call stack to manage function calls and handle the recursive process. On the other hand, a stack data structure can mimic the behavior of the call stack, allowing us to implement the same logic iteratively. This equivalence is based on the fact that both approaches follow the same depth-first traversal pattern
 
 ### Monotonic Stack
 
@@ -441,8 +480,8 @@ var search = function (nums, target) {
   }
   return index;
 };
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 11
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // -1
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 2); // 11
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 7); // -1
 ```
 
 ### 變形模板: 查找最後一個值等於給定值的元素
@@ -466,8 +505,8 @@ var search = function (nums, target) {
   }
   return index;
 };
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 21
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // -1
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 2); // 21
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 7); // -1
 ```
 
 ### 變形模板: 查找第一個大於等於給定值的元素
@@ -488,8 +527,8 @@ var search = function (nums, target) {
   }
   return -1; // nums 所有元素都比給定值小
 };
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 11
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // -1
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 2); // 11
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 7); // -1
 ```
 
 ### 變形模板: 查找最後一個小於等於給定值的元素
@@ -510,8 +549,8 @@ var search = function (nums, target) {
   }
   return -1; // nums 所有元素都比給定值大
 };
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 2) // 21
-search([0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,3,3,4,4,4,4,5,5,5,6], 7) // 31
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 2); // 21
+search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6], 7); // 31
 ```
 
 ### 參考資源
@@ -544,7 +583,7 @@ DFS 有「使用全域變數維護」和「接收返回值處理」兩種形式�
 
 > DFS
 
-###  0-1 BFS
+### 0-1 BFS
 
 邊權重只有 0 or 1 時，可以使用來找最短路徑。
 
@@ -616,7 +655,7 @@ const union = (x, y) => {
 
 假設一個圖有 v 個點，會進行 v - 1 次的迴圈計算，每次計算的最短路徑值會漸漸地被更加準確的值替代，直至得到最佳解。
 
-> 不能計算負權環圖，因為負權環可以無限制的降低總花費
+Bellman-Ford 算法能處理帶有負權邊的圖，因此廣泛應用於解決具有負權邊的最短路徑問題。
 
 [Bellman Ford Algorithm | Shortest path & Negative cycles | Graph Theory](https://youtu.be/lyw4FaxrwHg)
 
@@ -878,6 +917,23 @@ const num = Math.floor(Math.sqrt(x));
 
 [String.fromCharCode()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode)
 
+### 最小公倍數、最大公因數
+
+```javascript
+function gcd(a, b) {
+  while (b !== 0) {
+    let temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+}
+
+function lcm(a, b) {
+  return Math.abs(a * b) / gcd(a, b);
+}
+```
+
 ## 其餘補充
 
 ### 回溯法(BackTracking)
@@ -937,7 +993,7 @@ https://weihanglo.tw/posts/2021/deque/
 
 是一種解決範圍查詢問題的資料結構，儲存區間或線段，主要用於處理陣列中的子區間問題，如區間和、區間最小值、區間最大值等。
 
-一個包含 n 個區間的線段樹，空間複雜度為 O(n)，查詢的時間複雜度則為 O(log n + k)，其中 k 是符合條件的區間數量。 
+一個包含 n 個區間的線段樹，空間複雜度為 O(n)，查詢的時間複雜度則為 O(log n + k)，其中 k 是符合條件的區間數量。
 
 ![](https://2xiao.github.io/leetcode-js/assets/2-6-14-Ca9Lswd_.png)
 
@@ -962,6 +1018,16 @@ https://weihanglo.tw/posts/2021/deque/
 參考 3381. Maximum Subarray Sum With Length Divisible by K 筆記
 
 [静态二维数点问题【力扣周赛 427】](【静态二维数点问题【力扣周赛 427】】 【精准空降到 16:41】 https://www.bilibili.com/video/BV1YeqHYSEhK/?share_source=copy_web&vd_source=046e3366270c2901ac2599c8630596cd&t=1001)
+
+### sort() 排序要注意的地方
+
+```javascript
+// 如果這樣寫，[9,9,10,10] 排序後變成[ 10, 10, 9, 9 ]
+nums.sort();
+
+// 數字由小到大務必這樣寫：
+nums.sort((a, b) => a - b);
+```
 
 ### 打週賽
 

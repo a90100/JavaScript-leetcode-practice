@@ -31,9 +31,13 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 ### 處理循環陣列
 
-善用除法。
+善用除法 / 取模。
 
 另外一種做法是做兩個相同陣列的拼接。
+
+往後走：`(currentIndex + k) % n`
+
+往前走：`(currentIndex - k + n) % n`
 
 #### 例題:
 
@@ -114,7 +118,7 @@ for (const [key, value] of Object.entries(array)) {
 }
 
 // 例如：
-for (const [key, value] of Object.entries([1,2])) {
+for (const [key, value] of Object.entries([1, 2])) {
   console.log(key, value);
 }
 
@@ -156,6 +160,23 @@ hashMap.set(key, hashMap.get(key) ? [...hashMap.get(key), newObj] : [newObj]);
 ### HashMap 轉陣列、陣列轉 HashMap、HashMap 轉物件、物件轉 HashMap、HashMap 轉 JSON、JSON 轉 HashMap
 
 參考 [LeetCode-JS](https://2xiao.github.io/leetcode-js/book/hash.html#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2)
+
+### 實際上 hashMap、hashSet 的 set、add、get 時間複雜度最差為 O(n)
+
+另外還可參考 3418. Maximum Amount of Money Robot Can Earn 的筆記
+
+### 如果從 hashMap 取出陣列，要以複製的形式產生新陣列，不然會有 reference 的問題，在 LeetCode 上會跳出和記憶體相關的提示訊息。
+
+#### 例題:
+
+[737. Sentence Similarity II](https://leetcode.com/problems/sentence-similarity-ii)
+
+筆記中的解法：
+
+```javascript
+const queue = [...(similarMap?.get(s1[i]) ?? [])];
+// const queue = similarMap.get(s1[i]) ?? []; 這樣寫不對，物件 by reference 問題
+```
 
 ## Queue
 
@@ -305,6 +326,8 @@ const result = monotonicDecreasing(nums); // [9, 6, 5]
 ## Binary Tree
 
 > Tree is special form of graph.
+
+https://imgur.com/a/RugKzaw
 
 ### BFS(Breadth-First Search)
 
@@ -569,11 +592,28 @@ search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 
 
 ## Graph
 
+### 建圖(adjacency list)
+
+```javascript
+const graph = new Map();
+
+for (const [e, v] of edges) {
+  if (!graph.has(e)) graph.set(e, []);
+  graph.get(e).push(v);
+  if (!graph.has(v)) graph.set(v, []);
+  graph.get(v).push(e);
+}
+```
+
 ### DFS & BFS
 
 DFS 有「使用全域變數維護」和「接收返回值處理」兩種形式。
 
 #### 例題:
+
+[1730. Shortest Path to Get Food](https://leetcode.com/problems/shortest-path-to-get-food)
+
+> BFS
 
 [200. Number of Islands](https://leetcode.com/problems/number-of-islands)
 
@@ -582,6 +622,10 @@ DFS 有「使用全域變數維護」和「接收返回值處理」兩種形式�
 [79. Word Search](https://leetcode.com/problems/word-search)
 
 > DFS
+
+Tip: DFS 時多傳入一個參數 prev 代表當前節點的父節點。
+
+[261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree)
 
 ### 0-1 BFS
 
@@ -609,12 +653,18 @@ DFS 有「使用全域變數維護」和「接收返回值處理」兩種形式�
 
 [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees)
 
-### Union-Find 並查集
+### Union-Find 並查集，英文 Disjoint Set Union-find algorithm (DSU)
 
 最重要的 find、union 函式:
 
 ```javascript
+// 陣列
 const parents = [];
+
+// 設有 n 個點
+for (let i = 0; i < n; i++) {
+  parents.push(i);
+}
 
 const find = (x) => {
   if (parents[x] !== x) {
@@ -627,11 +677,37 @@ const find = (x) => {
 const union = (x, y) => {
   parents[find(x)] = find(y);
 };
+
+// 物件
+const uf = {};
+
+function find(x) {
+  if (uf[x] != x) uf[x] = find(uf[x]);
+  return uf[x];
+}
+
+function union(x, y) {
+  const rootX = find(x);
+  const rootY = find(y);
+
+  if (rootX === rootY) return;
+  uf[rootX] = rootY;
+}
 ```
+
+在一開始初始化 parents 時，需要的時間複雜度為 O(n)，其中 n 為元素數量。
+
+`Find()` 需要的時間複雜度為 O(α(n))，其中 α 是 inverse Ackermann function，它會成長非常地慢，所以可以將它視為常數時間。所以，O(α(n)) ≈ O(1)。因此，`Find()` 的時間複雜度為 O(1)。
+
+`Union()` 使用到 `Find()`，所以它的時間複雜度是 O(1)。
+
+Union Find data structure 內部需要一個 parents。所以，它的空間複雜度為 O(n)。
 
 更完整:
 
 [Union-Find 算法详解](https://github.com/labuladong/fucking-algorithm/blob/master/%E7%AE%97%E6%B3%95%E6%80%9D%E7%BB%B4%E7%B3%BB%E5%88%97/UnionFind%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3.md)
+
+[UnionFind 并查集算法详解](https://zhuanlan.zhihu.com/p/98406740)
 
 #### 例題:
 
@@ -1019,7 +1095,7 @@ https://weihanglo.tw/posts/2021/deque/
 
 [静态二维数点问题【力扣周赛 427】](【静态二维数点问题【力扣周赛 427】】 【精准空降到 16:41】 https://www.bilibili.com/video/BV1YeqHYSEhK/?share_source=copy_web&vd_source=046e3366270c2901ac2599c8630596cd&t=1001)
 
-### sort() 排序要注意的地方
+### `Array.prototype.sort()` 排序要注意的地方
 
 ```javascript
 // 如果這樣寫，[9,9,10,10] 排序後變成[ 10, 10, 9, 9 ]
@@ -1028,6 +1104,34 @@ nums.sort();
 // 數字由小到大務必這樣寫：
 nums.sort((a, b) => a - b);
 ```
+
+### `Array.prototype.sort()` 底層是用什麼排序演算法實現的
+
+From ChatGPT:
+
+`Array.prototype.sort()` 的底層排序演算法會根據 JavaScript 引擎的實作而有所不同：
+
+#### V8 (Google Chrome 和 Node.js 的 JavaScript 引擎)
+
+在 V8 引擎中，`Array.prototype.sort()` 的底層實現會根據陣列的長度與內容選擇不同的排序演算法：
+
+- **短陣列（小於 10 個元素）：** 使用插入排序（Insertion Sort）。
+
+  - 插入排序適合處理短陣列，因為它的開銷低且穩定。
+  - TC: 平均 O(n^2)，SC: O(1)
+
+- **長陣列（10 個或更多元素）：** 使用改進版的快速排序（QuickSort）或混合排序演算法：
+  - 從 V8 v7.0 開始，使用 **TimSort**（一種混合排序演算法，結合了合併排序和插入排序）。TimSort 在處理部分有序的資料時表現良好，並且是穩定的排序演算法。
+  - TC: 平均 `O(n * log n)`，SC: O(log n)
+
+> 那看來以前(2025/01/18 前)有些題目都分析錯了，有用到排序就有額外空間開銷。
+
+#### JavaScript 規範的要求
+
+根據 ECMAScript 規範，`Array.prototype.sort()` 並未指定必須使用某種特定的排序演算法，而是留給引擎實作時自行決定。規範只要求：
+
+- 如果沒有提供比較函數，則元素會先轉為字串並以字典序排序。
+- 排序演算法應盡可能有效率，但不必穩定（具體穩定性取決於實作）。
 
 ### 打週賽
 

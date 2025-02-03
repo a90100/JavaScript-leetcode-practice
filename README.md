@@ -11,7 +11,13 @@
 包含 JavaScript 相關的解題紀錄
 
 * [30 Days of JavaScript](https://leetcode.com/studyplan/30-days-of-javascript)
-* [LeetCode problemset JavaScript 主題](https://leetcode.com/problemset/javascript) 
+* [LeetCode problemset JavaScript 主題](https://leetcode.com/problemset/javascript)
+
+JS 題目中文版整理：
+
+https://gitee.com/hetanlong/leetcode/tree/main/solution/2600-2699
+
+https://gitee.com/hetanlong/leetcode/tree/main/solution/2700-2799
 
 ### Important questions
 
@@ -35,6 +41,9 @@
 4. 有需要再多加練習的題目記得標記
 5. 其他類(額外補充之類的資訊)
 
-## 如果在 LeetCode 上找不到看得懂的 Solutions...
+## 推薦資源
 
-可以到 [https://leetcode.cn/](https://leetcode.cn/)，中國版去看題解。
+* LeetCode 中國版：[https://leetcode.cn/](https://leetcode.cn/)，中文題解更好懂
+* [Hello 算法](https://www.hello-algo.com/)
+* [NeetCode](https://www.youtube.com/c/neetcode)
+* [灵茶山艾府](https://space.bilibili.com/206214?spm_id_from=333.337.search-card.all.click)

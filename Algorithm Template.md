@@ -15,6 +15,9 @@ const res = [];
 for (let i = 0; i < ?.length; i++) {};
 
 return res;
+
+// 不會使用到索引的情況，用 for of 更好
+for (let query of queries) {};
 ```
 
 ### 建立 2D 陣列
@@ -73,7 +76,51 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 
 [3355. Zero Array Transformation I](https://leetcode.com/problems/zero-array-transformation-i)
 
+## Matrix 矩陣
+
+一個矩陣當中：
+
+- 左上到右下 的斜線，可以看出規律，同一斜線上 row index - column index 皆相同
+
+https://imgur.com/a/R4IMpUf
+
+- 右上到左下 的斜線，可以看出規律，同一斜線上 row index + column index 皆相同
+
+https://imgur.com/q5RZSO9
+
+運用此特性的題目：
+
+[51. N-Queens](https://leetcode.com/problems/n-queens)
+
+[3446. Sort Matrix by Diagonals](https://leetcode.com/problems/sort-matrix-by-diagonals)
+
+## String
+
+### KMP 演算法
+
+[KMP 演算法筆記](https://ithelp.ithome.com.tw/articles/10353360)
+
+### `includes()` worst case 的時間複雜度是 O(l^2)，avg case 是 O(l)
+
+```javascript
+if (words[j].includes(words[i])) // 假設 words[j] 長度為 L, words[i] 長度為 M
+```
+
+1. 在 `words[j]`（長度 L）中找到 `words[i]`（長度 M）
+2. 它會從 `words[j]` 的頭開始，逐個嘗試匹配 `words[i]`
+3. 如果匹配成功，則時間複雜度為 O(L)（因為最好情況下，它只需要掃過一次 `words[j]`）
+4. 如果 `words[i]` 和 `words[j]` 在許多位置部分匹配但不完全匹配，最壞情況可能達到 `O(L * M)`（暴力匹配）
+
+```javascript
+let text = 'aaaaaaaaaaaaaaaab'; // 長度 L
+let pattern = 'aaaaaaaaaaaaaaac'; // 長度 M（幾乎相同，但最後一個字母不同）
+
+text.includes(pattern);
+```
+
 ## HashMap、HashSet
+
+假設有要處理重複字串/數字的情境，應該要想到這兩個資料結構，例如 677. Map Sum Pairs 也能用 hashMap。
 
 ### 將陣列元素存入 hashMap
 
@@ -103,7 +150,19 @@ const hashMap = _.countBy(s);
 #### Map.prototype.entries()、keys()、values()
 
 ```javascript
-for (const [key, value] of hashMap.entries()) {
+for (var [key, value] of hashMap) {
+  // for of 可以不用加 entries()，等於以下 for of
+}
+
+for (var [key, value] of hashMap.entries()) {
+  // ...
+}
+
+for (var key of hashMap.keys()) {
+  // ...
+}
+
+for (var value of hashMap.values()) {
   // ...
 }
 
@@ -647,6 +706,41 @@ Tip: DFS 時多傳入一個參數 prev 代表當前節點的父節點。
 
 應用範例: 選課系統的先修課，要先修完某些課才能修指定課程
 
+#### 模板
+
+```javascript
+var minimumSemesters = function (n, relations) {
+  const graph = new Map();
+  const indegrees = new Array(n + 1).fill(0);
+  const queue = [];
+  const visited = new Set();
+
+  for (const [e, v] of relations) {
+    graph.has(e) ? graph.get(e).push(v) : graph.set(e, [v]);
+    indegrees[v]++;
+  }
+
+  for (let i = 1; i < indegrees.length; i++) {
+    if (indegrees[i] === 0) queue.push(i);
+  }
+
+  while (queue.length) {
+    let len = queue.length;
+
+    for (let i = 0; i < len; i++) {
+      const node = queue.shift();
+      if (visited.has(node)) continue;
+      visited.add(node);
+
+      const neighbors = graph.get(node) ?? [];
+      for (let neighbor of neighbors) {
+        if (--indegrees[neighbor] === 0) queue.push(neighbor);
+      }
+    }
+  }
+};
+```
+
 #### 例題:
 
 [207. Course Schedule](https://leetcode.com/problems/course-schedule)
@@ -842,6 +936,45 @@ console.log(patientsQueue.toArray());
 // ]
 ```
 
+## Trie
+
+可以使用 208. Implement Trie (Prefix Tree) 筆記的模板：
+
+```javascript
+var Trie = function () {
+  this.trie = {};
+};
+
+Trie.prototype.insert = function (word) {
+  let curObj = this.trie;
+  for (let i = 0; i < word.length; i++) {
+    if (!curObj[word[i]]) curObj[word[i]] = {};
+    curObj = curObj[word[i]];
+  }
+  curObj.isWord = true;
+};
+
+Trie.prototype.search = function (word) {
+  let curObj = this.trie;
+  for (let i = 0; i < word.length; i++) {
+    if (!curObj[word[i]]) return false;
+    curObj = curObj[word[i]];
+  }
+  return !!curObj.isWord;
+};
+
+Trie.prototype.startsWith = function (prefix) {
+  let curObj = this.trie;
+  for (let i = 0; i < prefix.length; i++) {
+    if (!curObj[prefix[i]]) return false;
+    curObj = curObj[prefix[i]];
+  }
+  return true;
+};
+
+// 使用範例
+```
+
 ## 動態規劃
 
 經典問題: 背包問題、找零錢問題
@@ -958,6 +1091,16 @@ Floyd 判圈算法，又稱龜兔賽跑算法(Tortoise and Hare Algorithm)，是
 ### Morris traversal 莫里斯遍歷
 
 [Algorithm 演算法 - 樹遍歷系列 Morris traversal 莫里斯遍歷](https://blog.taiwolskit.com/algorithm-morris-traversal)
+
+### 拉賓-卡普演算法（Rabin–Karp algorithm）、卡普-拉賓演算法（Karp–Rabin algorithm）
+
+[Rabin–Karp / Karp–Rabin 演算法筆記](https://ithelp.ithome.com.tw/articles/10369623)。
+
+#### 例題:
+
+[214. Shortest Palindrome](https://leetcode.com/problems/shortest-palindrome)
+
+[2156. Find Substring With Given Hash Value](https://leetcode.com/problems/find-substring-with-given-hash-value)
 
 ## 非演算法(一些語法)
 
@@ -1098,8 +1241,8 @@ https://weihanglo.tw/posts/2021/deque/
 ### `Array.prototype.sort()` 排序要注意的地方
 
 ```javascript
-// 如果這樣寫，[9,9,10,10] 排序後變成[ 10, 10, 9, 9 ]
-nums.sort();
+// 如果這樣寫，排序後變成 [15, 16, 2, 23, 42, 8]
+[2, 8, 15, 16, 23, 42].sort();
 
 // 數字由小到大務必這樣寫：
 nums.sort((a, b) => a - b);
@@ -1133,8 +1276,21 @@ From ChatGPT:
 - 如果沒有提供比較函數，則元素會先轉為字串並以字典序排序。
 - 排序演算法應盡可能有效率，但不必穩定（具體穩定性取決於實作）。
 
+### 數學 - 調和級數的時間複雜度
+
+參考：
+
+https://imgur.com/a/IFFlPjV
+
+[調和級數 - 冰川的個人網站](https://dada878.com/blogs/harmonic-series)
+
+[调和级数在分析算法时间复杂度中的应用](https://zhuanlan.zhihu.com/p/567870468)
+
+3447. Assign Elements to Groups with Constraints 這題的筆記有用到這個。
+
 ### 打週賽
 
 1. input、測資不大時，有時可以暴力解題目，比較快完成而且出 bug 機率更少，比完再來優化，不過面試時又是另一回事
 2. 把解題想法寫下來有利於解題
 3. 有時測試資料會給你解題線索，ex: 1072. Flip Columns For Maximum Number of Equal Rows、1975. Maximum Matrix Sum
+4. 碰到遍歷二維陣列的情況，若子陣列有好幾個元素，可以把這些元素分別存在變數裡，才不會一堆索引要處理，會比較簡單，或是用 for of 迴圈，例如 3433. Count Mentions Per User 的情況。

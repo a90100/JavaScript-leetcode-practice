@@ -71,3 +71,22 @@ const twoDArr = new Array(rows).fill().map(() => new Array(cols).fill(0));
 ### 例題：
 
 [3355. Zero Array Transformation I](https://leetcode.com/problems/zero-array-transformation-i)
+
+## 區間相關問題的演算法
+
+> 加粗字體為最佳方案：
+
+* 陣列不變，區間查詢：**前綴和**、樹狀數組、線段樹
+* 陣列單點修改，區間查詢：**樹狀數組**、線段樹
+* 陣列區間修改，單點查詢：**差分**、線段樹
+* 陣列區間修改，區間查詢：**線段樹**
+
+注意：上述總結是對於一般性而言的（能直接解決的），對標的是模板問題。
+
+但存在經過一些經過"額外"操作，對問題進行轉化，從而使用別的解決方案求解的情況。
+
+例如某些問題，我們可以先對原數組進行差分，然後使用樹狀數組，也能解決區間修改問題。
+
+或者使用多個樹狀數組來維護多個指標，從而實現類似線段樹的持久化標記操作。
+
+> 取自 [【宫水三叶】一题双解 :「差分」&「线段树」（附区间求和目录）](https://leetcode.cn/problems/corporate-flight-bookings/solutions/968467/gong-shui-san-xie-yi-ti-shuang-jie-chai-fm1ef/)

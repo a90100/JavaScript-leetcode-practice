@@ -1,6 +1,6 @@
 # JavaScript-leetcode-practice
 
-這裡放的是我練習用 JavaScript 寫 LeetCode 的筆記和解法
+這裡放的是我練習用 JavaScript 寫 LeetCode 的筆記和解法。
 
 有任何問題和修正的地方都歡迎發 issue 和 PR 給我!
 
@@ -31,7 +31,7 @@ https://gitee.com/hetanlong/leetcode/tree/main/solution/2700-2799
 
 ### Extended questions
 
-從 LeetCode 高頻題的 Similar Questions 找到的題目、每日一題、打過的周賽題目。
+包含 LeetCode 高頻題的 Similar Questions 找到的題目、每日一題、打過的周賽題目、[leetcode-js](https://github.com/2xiao/leetcode-js) 的題目。
 
 ## 每份筆記可能會記錄以下幾項
 

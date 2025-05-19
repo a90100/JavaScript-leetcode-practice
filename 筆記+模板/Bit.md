@@ -1,5 +1,17 @@
 # Bit
 
+## 位元運算特性
+
+1. 優點是速度快，減少時間複雜度，缺點是不直觀且只支持整數運算
+2. 原本 JavaScript 的數值類型（Number）是 64 位元浮點數（IEEE 754 double-precision floating point），進行位運算時會將操作數轉換為 32 位元的帶符號整數（signed 32-bit integers），也就是 65 位浮點數 => 32 位整數 => 進行位運算
+
+根據第二點，在轉換後，若超過 32 位，超過的部分會被捨棄，取低位 32 bit，一般會被捨棄的是小數部分，會是超過 -2^31 ~ 2^31-1 的數字，所以才會有第一點的缺點。
+
+```
+      Before: 11100110111110100000000000000110000000000001
+      After:              10100000000000000110000000000001
+```
+
 ## [Bitwise AND (&)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_AND)
 
 可以計算兩個數字其二進位數的每個位元是否都為一然後輸出

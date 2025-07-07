@@ -4,7 +4,7 @@
 
 [KMP 演算法筆記](https://ithelp.ithome.com.tw/articles/10353360)
 
-## `includes()` worst case 的時間複雜度是 O(l^2)，avg case 是 O(l)
+## `includes()` worst case 的時間複雜度是 O($l^2$)，avg case 是 O(l)
 
 ```javascript
 if (words[j].includes(words[i])) // 假設 words[j] 長度為 L, words[i] 長度為 M

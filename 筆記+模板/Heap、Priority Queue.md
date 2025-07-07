@@ -29,8 +29,7 @@ minQueue.dequeue();
 
 // 取出元素格式
 // {
-//   priority: 根據 dis 值而定,
-//   element: { dis: 根據 dis 值而定, 其他... }
+//   dis: 根據 dis 值而定, 其他...
 // }
 ```
 
@@ -46,10 +45,7 @@ minQueue.enqueue(num);
 minQueue.dequeue();
 
 // 取出元素格式
-// {
-//   priority: num,
-//   element: num
-// }
+// num
 ```
 
 3.
@@ -74,25 +70,4 @@ maxHeap.dequeue();
 
 // 取出元素格式 (直接取得存入的物件本身)
 // { freq: 2, word: 'i' }
-```
-
-4.
-
-```javascript
-// 其他種寫法
-const patientsQueue = new MinPriorityQueue();
-
-patientsQueue
-  .enqueue('patient y', 1) // highest priority
-  .enqueue('patient z', 3)
-  .enqueue('patient w', 4) // lowest priority
-  .enqueue('patient x', 2);
-
-console.log(patientsQueue.toArray());
-// [
-//   { priority: 1, element: 'patient y' },
-//   { priority: 2, element: 'patient x' },
-//   { priority: 3, element: 'patient z' },
-//   { priority: 4, element: 'patient w' }
-// ]
 ```

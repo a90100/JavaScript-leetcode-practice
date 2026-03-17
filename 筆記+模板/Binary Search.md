@@ -162,6 +162,25 @@ search([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 
 
 參考 744. Find Smallest Letter Greater Than Target
 
+```javascript
+var nextGreatestLetter = function (letters, target) {
+  let l = 0;
+  let r = letters.length - 1;
+
+  while (l < r) {
+    const mid = Math.floor((l + r) / 2);
+
+    if (letters[mid] > target) {
+      r = mid; // 符合 letters[mid] > target 的條件，而 letters[mid] 本身有可能就是題目要的答案，所以選擇逐步逼近 l 指針
+    } else {
+      l = mid + 1;
+    }
+  }
+
+  return letters[r] > target ? letters[r] : -1; // 如果最後一個元素比 target 大，則返回該元素，否則返回 -1
+};
+```
+
 ## 參考資源
 
 [二分法的二段性、两套模板 和 答案判定](https://writings.sh/post/binary-search)

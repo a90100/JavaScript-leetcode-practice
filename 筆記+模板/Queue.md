@@ -1,5 +1,11 @@
 # Queue
 
+JavaScript 本身並沒有內建這個資料結構，不過 LeetCode 有自動引入這兩個 Library，可以使用。
+
+[@datastructures-js/queue](https://github.com/datastructures-js/queue/tree/v4.2.3)
+
+[@datastructures-js/deque](https://github.com/datastructures-js/deque/tree/v1.0.4)
+
 ## Monotonic Queues
 
 ### Increasing Monotonic Queue
@@ -54,5 +60,7 @@ console.log(q); // [6, 5, 3]
 ```
 
 ## 雙端佇列 Deque
+
+其發音為 deck，又稱 double-ended queue。 
 
 https://weihanglo.tw/posts/2021/deque/
